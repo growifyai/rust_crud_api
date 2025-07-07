@@ -1,4 +1,4 @@
- This file defines the infrastructure for your application on Render.
+# This file defines the infrastructure for your application on Render.
 # It specifies a PostgreSQL database and a Rust web service.
 
 databases:
