@@ -1,0 +1,11 @@
+[package]
+name = "rust_crud_api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.6"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+sqlx = { version = "0.6", features = [ "runtime-tokio-rustls", "postgres" ] }
+dotenv = "0.15"

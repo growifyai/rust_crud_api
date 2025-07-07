@@ -1,0 +1,34 @@
+ This file defines the infrastructure for your application on Render.
+# It specifies a PostgreSQL database and a Rust web service.
+
+databases:
+  # Defines the PostgreSQL database service.
+  - name: rust-todo-db
+    databaseName: rust_todo_db # The name of the database inside PostgreSQL.
+    user: rust_todo_user      # The username to connect with.
+    plan: free                # Use the free tier for this example.
+    # Note: Render will automatically generate a strong password.
+
+services:
+  # Defines the Rust web service.
+  - type: web
+    name: rust-crud-api
+    runtime: rust
+    # The command to build the application.
+    # This compiles the Rust code in release mode for performance.
+    buildCommand: "cargo build --release"
+    # The command to start the application.
+    # This runs the compiled binary. The executable name matches your project name.
+    startCommand: "./target/release/rust_crud_api"
+    plan: free # Use the free tier for this example.
+    # Define the environment variables for the service.
+    envVars:
+      - key: DATABASE_URL
+        # This special syntax tells Render to get the internal connection string
+        # from the database service defined above. This is secure and efficient.
+        fromDatabase:
+          name: rust-todo-db
+          property: connectionString
+      - key: RUST_LOG # Optional: for better logging
+        value: info
+
